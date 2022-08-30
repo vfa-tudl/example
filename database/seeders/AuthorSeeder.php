@@ -14,7 +14,9 @@ class AuthorSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Author::factory(2)->create();
+        // \App\Models\Author::factory(1)
+        // ->has(\App\Models\Post::factory()->count(3), 'posts')
+        // ->create();
 
     }
 }

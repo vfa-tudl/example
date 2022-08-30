@@ -2,9 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\V1\PostController;
+use App\Http\Controllers\V1\AuthController;
+use App\Http\Controllers\V1\AuthorController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,19 +26,27 @@ Route::group(['middleware'=> ['auth:sanctum']], function () {
     Route::get('/posts/search/{name}',[PostController::class,"search"]);
 
     Route::post('/logout', [AuthController::class,"logout"]);
+    Route::prefix('v1')->group(function(){
+        //Post Controller
+        Route::resource('posts', PostController::class);
+        //Author Controller
+        Route::apiResource('authors', AuthorController::class);
+
+    });
 });
 
-//Pulbic Route
-Route::resource('posts', PostController::class);
+/*
+Pulbic Route
+*/
 
-Route::post('/register', [AuthController::class,"register"]);
-Route::post('/login', [AuthController::class,"login"]);
+Route::prefix('v1')->group(function(){
 
-
-
-//Author Controller
-Route::apiResource('authors', AuthorController::class);
-
+    /*
+    User Access
+    */
+    Route::post('/register', [AuthController::class,"register"]);
+    Route::post('/login', [AuthController::class,"login"]);
+});
 
 // Route::get('/posts',[PostController::class,"index"]);
 

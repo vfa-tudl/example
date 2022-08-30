@@ -14,13 +14,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(1)
+        ->has(\App\Models\Author::factory()->count(3)
+                ->has(\App\Models\Post::factory()->count(3), 'posts')
+        ,'authors')
+        ->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        $this->call(AuthorSeeder::class);
-        $this->call(PostSeeder::class);
+        \App\Models\User::factory()
+        ->has(\App\Models\Author::factory()->count(3)
+                ->has(\App\Models\Post::factory()->count(3), 'posts')
+        ,'authors')
+        ->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
+        // $this->call(AuthorSeeder::class);
     }
 }

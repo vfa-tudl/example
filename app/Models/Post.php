@@ -13,14 +13,7 @@ class Post extends Model
     protected $fillable =[
        'title', 'content'
     ];
-    // public function author(){
-    //     return $this->hasManyThrough(
-    //         '\App\Models\Author',
-    //         '\App\Models\PostAuthor',
-    //         '\post_id',
-    //         'id',
-    //         'id',
-    //         '\author_id'
-    //     );
-    // }
+    public function authors(){
+        return $this->belongsToMany(User::class,'post_author','post_id','author_id');
+    }
 }

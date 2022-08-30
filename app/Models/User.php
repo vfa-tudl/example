@@ -41,4 +41,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    /**
+     * Get all of the Authors for the User
+     *
+     * @return \Illuminate\DatabAuthorquent\Relations\HasMany
+     */
+    public function Authors()
+    {
+        return $this->hasMany(Author::class,'user_id',"id");
+    }
 }
