@@ -16,7 +16,10 @@ return new class extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('avatar')->default('Example');
             $table->integer('user_id');
+            $table->string('profile');
+            $table->time('date');
             $table->timestamps();
         });
     }

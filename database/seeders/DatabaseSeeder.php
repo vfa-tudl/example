@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
         ,'authors')
         ->create([
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'email' => 'tudl@vitalify.asia',
+            'password'=> bcrypt('12345678'),
         ]);
         // $this->call(AuthorSeeder::class);
     }

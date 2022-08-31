@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Author::class,'user_id',"id");
     }
+
+
+    public function Posts(){
+        return $this->hasManyThrough(Post::class, Author::class);
+    }
 }

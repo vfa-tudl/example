@@ -18,7 +18,10 @@ class AuthorFactory extends Factory
     {
         return [
             //
-            'name'=> $this->faker->name
+            'name'=> $this->faker->name,
+            'avatar'=>$this->faker->imageUrl($width= 640, $height = 480, 'cats', true, 'Faker'),
+            'date'=> $this->faker->dateTime($max = 'now', $timezone = null),
+            'profile'=> $this->faker->text($maxNbChars = 200),
         ];
     }
 }

@@ -28,9 +28,12 @@ Route::group(['middleware'=> ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class,"logout"]);
     Route::prefix('v1')->group(function(){
         //Post Controller
-        Route::resource('posts', PostController::class);
+        Route::apiresource('posts', PostController::class);
         //Author Controller
         Route::apiResource('authors', AuthorController::class);
+        // Route::get('/authors', function(){
+        //     return response()->json(request()->user());
+        // });
 
     });
 });
