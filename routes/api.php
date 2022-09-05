@@ -26,16 +26,15 @@ Route::group(['middleware'=> ['auth:sanctum']], function () {
     Route::get('/posts/search/{name}',[PostController::class,"search"]);
 
     Route::post('/logout', [AuthController::class,"logout"]);
+
     Route::prefix('v1')->group(function(){
         //Post Controller
-        Route::apiresource('posts', PostController::class);
+        Route::apiResource('posts', PostController::class);
         //Author Controller
         Route::apiResource('authors', AuthorController::class);
-        // Route::get('/authors', function(){
-        //     return response()->json(request()->user());
-        // });
-
     });
+
+
 });
 
 /*
@@ -43,7 +42,6 @@ Pulbic Route
 */
 
 Route::prefix('v1')->group(function(){
-
     /*
     User Access
     */
@@ -56,22 +54,3 @@ Route::prefix('v1')->group(function(){
 // Route::post('/posts', [PostController::class,"store"]);
 
 // Route::get('posts/{id}',[PostController::class,'']);
-
-// Route::put('posts/{post}', function (Post $post) {
-//     $post->update([
-//         'title'=> request("title"),
-//         'content'=> request("content"),
-//     ]);
-
-// });
-
-
-// Route::delete('posts/{post}', function (Post $post) {
-//     $status =$post->delete();
-
-//     return [
-        
-//         'status' =>  $status,
-    
-//     ];
-// });
