@@ -19,12 +19,18 @@ return new class extends Migration
             $table->string('gender')->default("NG");
             $table->string('display_name');
             $table->string('address');
-            $table->string('phone_number');
-            $table->time('status_date');
-            $table->string('status');
-            $table->string('fb_url');
-            $table->array('languages');
-            $table->array('national');            
+            $table->string('avatar')->default('Example');
+            $table->string('phone_number'); 
+            $table->time('status_date'); // Thoi Gian Luu Tru
+            $table->string('status'); //Tinh Trang Luu Tru
+            $table->string('fb_url');// Thong Tin FB
+            $table->text('languages');// Ngon Ngu
+            $table->text('national');//Quoc Tich  
+
+            $table->string('provider', 20)->nullable();
+            $table->string('provider_id')->nullable();
+            $table->string('access_token')->nullable(); 
+                     
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

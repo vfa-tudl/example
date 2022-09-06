@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\V1\PostController;
 use App\Http\Controllers\V1\AuthController;
 use App\Http\Controllers\V1\AuthorController;
+use App\Http\Controllers\V1\AccountController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,6 +33,8 @@ Route::group(['middleware'=> ['auth:sanctum']], function () {
         Route::apiResource('posts', PostController::class);
         //Author Controller
         Route::apiResource('authors', AuthorController::class);
+        // User Controller
+        Route::apiResource('account', AccountController::class);
     });
 
 

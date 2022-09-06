@@ -24,13 +24,14 @@ class UserFactory extends Factory
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
             'display_name'=> fake()->name(),
-            'address'=>faker()->address(),
-            'phone_number'=>faker()->mobileNumber(),
-            'status_date'=> faker()->dateTime($max = 'now', $timezone = null),
-            'status'=>faker()->randomElements($array = array ('a','b','c'), $count = 1),
-            'fb_url'=>faker()->url(),
-            'languages'=>faker()->randomElements($array = array ('a','b','c'), $count = 1),
-            'national'=>faker()->  randomElements($array = array ('a','b','c'), $count = 1),
+            'avatar'=>$this->faker->imageUrl($width= 640, $height = 480, 'cats', true, 'Faker'),
+            'address'=>fake()->address(),
+            'phone_number'=>fake()->phoneNumber(),
+            'status_date'=> fake()->dateTime($max = 'now', $timezone = null),
+            'status'=>fake()->name(),
+            'fb_url'=>fake()->url(),
+            'languages'=>fake()->name(),
+            'national'=>fake()->name(),
         ];
     }
 
