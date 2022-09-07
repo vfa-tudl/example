@@ -23,7 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 //Protected Route
-Route::group(['middleware'=> ['auth:sanctum']], function () {
+Route::group(['middleware'=> ['auth:api']], function () {
     Route::get('/posts/search/{name}',[PostController::class,"search"]);
 
     Route::post('/logout', [AuthController::class,"logout"]);
@@ -51,6 +51,13 @@ Route::prefix('v1')->group(function(){
     Route::post('/register', [AuthController::class,"register"]);
     Route::post('/login', [AuthController::class,"login"]);
 });
+
+//Open Auth
+Route::get('auth/social', 'App\Http\Controllers\Auth\LoginController@show')->name('social.login');
+Route::get('oauth/{driver}', 'App\Http\Controllers\Auth\LoginController@redirectToProvider')->name('social.oauth');
+Route::get('oauth/{driver}/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback')->name('social.callback');
+
+
 
 // Route::get('/posts',[PostController::class,"index"]);
 

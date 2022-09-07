@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('avatar')->default('Example');
-            $table->integer('user_id');
             $table->string('profile');
             $table->time('date');
             $table->timestamps();

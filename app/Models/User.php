@@ -50,13 +50,11 @@ class User extends Authenticatable
      *
      * @return \Illuminate\DatabAuthorquent\Relations\HasMany
      */
-    public function Authors()
+    public function Posts()
     {
-        return $this->hasMany(Author::class);
+        return $this->hasMany(Post::class);
     }
 
 
-    public function Posts(){
-        return $this->hasManyThrough(Post::class, Author::class);
-    }
+  
 }

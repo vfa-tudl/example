@@ -16,24 +16,27 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('gender')->default("NG");
-            $table->string('display_name');
-            $table->string('address');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            
+            $table->string('gender')->nullable();
+            $table->string('display_name')->default("User");
+            $table->string('address')->default("");
             $table->string('avatar')->default('Example');
-            $table->string('phone_number'); 
-            $table->time('status_date'); // Thoi Gian Luu Tru
-            $table->string('status'); //Tinh Trang Luu Tru
-            $table->string('fb_url');// Thong Tin FB
-            $table->text('languages');// Ngon Ngu
-            $table->text('national');//Quoc Tich  
+            $table->string('phone_number')->default(""); 
+
+            $table->time('status_date')->nullable(); // Thoi Gian Luu Tru
+            $table->string('status')->nullable(); //Tinh Trang Luu Tru
+            $table->string('fb_url')->default("");// Thong Tin FB
+            $table->text('languages')->nullable();// Ngon Ngu
+            $table->text('national')->nullable();//Quoc Tich  
 
             $table->string('provider', 20)->nullable();
             $table->string('provider_id')->nullable();
             $table->string('access_token')->nullable(); 
-                     
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+                    
+
             $table->rememberToken();
             $table->timestamps();
         });

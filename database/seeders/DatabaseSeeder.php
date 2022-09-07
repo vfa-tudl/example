@@ -15,15 +15,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \App\Models\User::factory(1)
-        ->has(\App\Models\Author::factory()->count(3)
-                ->has(\App\Models\Post::factory()->count(3), 'posts')
-        ,'authors')
+        ->has(\App\Models\Post::factory()->count(10)
+        ,'posts')
         ->create();
 
         \App\Models\User::factory()
-        ->has(\App\Models\Author::factory()->count(3)
-                ->has(\App\Models\Post::factory()->count(3), 'posts')
-        ,'authors')
+        ->has(\App\Models\Post::factory()->count(5)
+        ,'posts')
         ->create([
             'name' => 'Test User',
             'email' => 'tudl@vitalify.asia',
