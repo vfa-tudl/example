@@ -141,7 +141,10 @@ class LoginController extends Controller
             'token' => $token
         ];
 
-        return response($response,201);
+        return response([
+            'status' => 'E201',
+            'user'=>$response,
+        ],201);
 
     }
 
@@ -156,16 +159,27 @@ class LoginController extends Controller
         //Checking data Email and Password
 
         $user =User::where('email',$fields['email'])->first();
-
-
-        if(!$user || !Hash::check($fields['password'],$user->password)){
+        if($user==null || (bool)$user->isDisable){
             return response([
-                'message'=> 'Error in Password',
+                'status' => 'E401',
+                'message'=> 'User not found or being disabled',
+            
+            ],401);
+        }
+        if($fields['email']!=$user->email){
+            return response([
+                'status' => 'E403',
+                'message'=> 'Error Email',
             
             ],401);
         };
-
-
+        if(!Hash::check($fields['password'],$user->password)){
+            return response([
+                'status' => 'E402',
+                'message'=> 'Error Password',
+            
+            ],401);
+        };
         $token = $user -> createToken('AuthToken')-> plainTextToken;
 
         $response = [
@@ -173,7 +187,10 @@ class LoginController extends Controller
             'token' => $token
         ];
 
-        return response($response,201);
+        return response([
+            'status' => 'E201',
+            'user'=>$response,
+        ],201);
 
     }
 
@@ -181,7 +198,9 @@ class LoginController extends Controller
 
     public function logout(Request $request){
         Auth::logout();
-        return redirect('/login');
+        return response([
+            'status' => 'E201',            
+        ],201);
 
     }
 }

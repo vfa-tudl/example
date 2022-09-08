@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        $this->call(JobSeeder::class);
+        
         \App\Models\User::factory(1)
         ->create();
 
@@ -25,5 +25,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'tudl@vitalify.asia',
             'password'=> bcrypt('12345678'),
         ]);
+        $this->call(JobSeeder::class);
     }
 }

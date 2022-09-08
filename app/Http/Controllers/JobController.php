@@ -88,13 +88,14 @@ class JobController extends Controller
     {
         // $data = Job::where('name','like','%'.$title.'%')
         //                ->where('Company','like','%'.$company.'%')->get();
+        $data = (new Job)->newQuery();
         if ($request->has('name')) {
-            $data = Job::where('name','like', '%'.$request->input('name').'%')->get();
+            $data->where('name','like', '%'.$request->input('name').'%');
         }
 
         
         return [
-            "data"=> $data
+            "data"=> $data->get()
         ];
     }
 }
