@@ -14,19 +14,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        $this->call(JobSeeder::class);
         \App\Models\User::factory(1)
-        ->has(\App\Models\Post::factory()->count(10)
-        ,'posts')
         ->create();
 
         \App\Models\User::factory()
-        ->has(\App\Models\Post::factory()->count(5)
-        ,'posts')
         ->create([
             'name' => 'Test User',
             'email' => 'tudl@vitalify.asia',
             'password'=> bcrypt('12345678'),
         ]);
-        // $this->call(AuthorSeeder::class);
     }
 }

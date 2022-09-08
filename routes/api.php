@@ -3,7 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\V1\PostController;
-use App\Http\Controllers\V1\AuthController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\V1\AuthorController;
 use App\Http\Controllers\V1\AccountController;
 /*
@@ -26,7 +27,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware'=> ['auth:api']], function () {
     Route::get('/posts/search/{name}',[PostController::class,"search"]);
 
-    Route::post('/logout', [AuthController::class,"logout"]);
+    Route::post('/logout', [LoginController::class,"logout"]);
 
     Route::prefix('v1')->group(function(){
         //Post Controller
@@ -48,8 +49,8 @@ Route::prefix('v1')->group(function(){
     /*
     User Access
     */
-    Route::post('/register', [AuthController::class,"register"]);
-    Route::post('/login', [AuthController::class,"login"]);
+    Route::post('/register', [LoginController::class,"register"]);
+    Route::post('/login', [LoginController::class,"login"]);
 });
 
 //Open Auth
@@ -57,7 +58,10 @@ Route::get('auth/social', 'App\Http\Controllers\Auth\LoginController@show')->nam
 Route::get('oauth/{driver}', 'App\Http\Controllers\Auth\LoginController@redirectToProvider')->name('social.oauth');
 Route::get('oauth/{driver}/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback')->name('social.callback');
 
+//Free Search
+Route::post('/job/search',[JobController::class,"search"]);
 
+   
 
 // Route::get('/posts',[PostController::class,"index"]);
 

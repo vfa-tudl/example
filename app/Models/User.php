@@ -50,9 +50,9 @@ class User extends Authenticatable
      *
      * @return \Illuminate\DatabAuthorquent\Relations\HasMany
      */
-    public function Posts()
+    public function Jobs()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Job::class);
     }
 
 
