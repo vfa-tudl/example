@@ -86,10 +86,12 @@ class JobController extends Controller
     }
     public function search($title=null,$company=null)
     {
-        $status = Job::where('name','like','%'.$title.'%')
+        $data = Job::where('name','like','%'.$title.'%')
                        ->where('Company','like','%'.$company.'%')->get();
+        
+        
         return [
-            "data"=> $status
+            "data"=> $data
         ];
     }
 }

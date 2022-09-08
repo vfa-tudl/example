@@ -15,7 +15,7 @@ class JobSeeder extends Seeder
     public function run()
     {
         //
-        \App\Models\Field::factory(10)
-        ->has(\App\Models\Job::factory()->count(10),"job")->create();
+        \App\Models\Field::factory(100)
+        ->has(\App\Models\Job::factory()->count(100),"job")->create();
     }
 }
