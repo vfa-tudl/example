@@ -84,11 +84,14 @@ class JobController extends Controller
     {
         //
     }
-    public function search($title=null,$company=null)
+    public function search(Request $request)
     {
-        $data = Job::where('name','like','%'.$title.'%')
-                       ->where('Company','like','%'.$company.'%')->get();
-        
+        // $data = Job::where('name','like','%'.$title.'%')
+        //                ->where('Company','like','%'.$company.'%')->get();
+        if ($request->has('name')) {
+            $data = Job::where('name','like', '%'.$request->input('name').'%')->get();
+        }
+
         
         return [
             "data"=> $data
