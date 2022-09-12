@@ -72,7 +72,6 @@ class PostController extends Controller
      */
     public function update(\App\Models\Post $post)
     {
-        dd($post);
 
         // $status = $post->update($request->all());
 
