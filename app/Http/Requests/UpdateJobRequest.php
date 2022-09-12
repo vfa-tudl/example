@@ -13,7 +13,7 @@ class UpdateJobRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,15 @@ class UpdateJobRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string', 
+            'Company' => 'required|string',
+            'salary' => 'required|string',
+            'location' => 'required|string',
+            'work_hour' => 'required|string',
+            'description' => 'required|string',
+            'probation'=> 'required|string',
+            'display_status'=> 'required|string',
+            'Image'=>'required|string',
         ];
     }
 }
