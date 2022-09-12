@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -31,15 +32,7 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
+
 
     /**
      * Get a validator for an incoming registration request.
@@ -69,5 +62,31 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+    public function  register(Request $request){
+        $fields = $request->validate([
+            'name'=> 'required|string',
+            'email'=> 'required|string|unique:users,email',
+            'password'=>'required|string|confirmed'
+        ]);
+
+        $user = User::create([
+            'name'=> $fields['name'],
+            'email'=> $fields['email'],
+            'password'=> bcrypt($fields['password']),
+        ]);
+
+        $token = $user -> createToken('AuthToken')-> plainTextToken;
+
+        $response = [
+            'user'=> $user,
+            'token' => $token
+        ];
+
+        return response([
+            'status' => 'E201',
+            'user'=>$response,
+        ],201);
+
     }
 }

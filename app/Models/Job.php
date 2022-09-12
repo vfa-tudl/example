@@ -4,20 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Traits\Filterable;
 
 class Job extends Model
 {
     use HasFactory;
-    protected $fillable =[
-        'name', 
-        'Company',
-        'field_id',
+    use Filterable;
+    public function filterName($query, $value)
+    {
+        return $query->where('name', 'LIKE', '%' . $value . '%');
+    }
+    
+    public function filterCompany($query,$value){
+        return $query->where('Company', 'LIKE', '%' . $value . '%');
+    }
+
+    protected $fillable =[      
         'salary',
         'location',
-        'work_hour',
-        'description',
         'probation',
         'display_status',
-        'Image',  
     ];
 }

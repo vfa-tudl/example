@@ -18,9 +18,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::fallback(function() {
-    return view('welcome');
-});
+
 
 Route::get('/home', [App\Http\Controllers\ProfileController::class, 'index'])->name('home');
 
@@ -34,7 +32,6 @@ Route::post('/posts/{id}/edit', [App\Http\Controllers\V1\PostController::class,'
 // Route::get('oauth/{driver}', 'App\Http\Controllers\Auth\LoginController@redirectToProvider')->name('social.oauth');
 // Route::get('oauth/{driver}/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback')->name('social.callback');
 
-Route::post('/logout', [App\Http\Controllers\V1\AuthController::class,"logout"])->name('logout');
 
 //Account Profile
 Route::get('/account', [App\Http\Controllers\V1\AccountController::class,'show'])->name('account');

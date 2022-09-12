@@ -19,7 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'display_name','avatar',
-        'email', 'password',
+        'email', 
         'address', 'phone_number',
         'status_date', 'status' ,
         'fb_url', 'languages' , 'national',
@@ -53,6 +53,44 @@ class User extends Authenticatable
     public function Jobs()
     {
         return $this->hasMany(Job::class);
+    }
+
+    public function scopelogin($fields,$user){
+        // $fields = $request->validate([
+        //     'email'=> 'required|string',
+        //     'password'=>'required|string'
+        // ]);
+
+        // $fields= $request->all();
+
+
+        //Checking data Email and Password
+
+        if($fields['email']!=$user['email']){
+            return response([
+                'status' => 'E403',
+                'message'=> 'Error Email',
+            
+            ],401);
+        };
+        if(!Hash::check($fields['password'],$user['password'])){
+            return response([
+                'status' => 'E402',
+                'message'=> 'Error Password',
+            
+            ],401);
+        };
+        $token = $user -> createToken('AuthToken')-> plainTextToken;
+
+        $response = [
+            'user'=> $user,
+            'token' => $token
+        ];
+
+        return response([
+            'status' => 'E201',
+            'user'=>$response,
+        ],201);
     }
 
 

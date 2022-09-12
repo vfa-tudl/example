@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Requests\UserLoginRequest;
+use App\Http\Requests\UserRegisterRequest;
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
@@ -19,10 +21,10 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('guest')->except('logout');
+    // }
 
    
     protected $providers = [
@@ -148,13 +150,8 @@ class LoginController extends Controller
 
     }
 
-    public function  login(Request $request){
-        $fields = $request->validate([
-            'email'=> 'required|string',
-            'password'=>'required|string'
-        ]);
-
-     
+    public function  login(UserLoginRequest $request){
+        $fields =$request->all();
 
         //Checking data Email and Password
 
@@ -189,7 +186,7 @@ class LoginController extends Controller
 
         return response([
             'status' => 'E201',
-            'user'=>$response,
+            'data'=>$response,
         ],201);
 
     }
